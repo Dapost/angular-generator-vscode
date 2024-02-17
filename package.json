@@ -53,28 +53,36 @@
     ],
     "menus": {
       "explorer/context": [{
-          "command": "angular-generate.component"
+          "command": "angular-generate.component",
+          "when": "explorerResourceIsFolder"
         },
         {
-          "command": "angular-generate.directive"
+          "command": "angular-generate.directive",
+          "when": "explorerResourceIsFolder"
         },
         {
-          "command": "angular-generate.service"
+          "command": "angular-generate.service",
+          "when": "explorerResourceIsFolder"
         },
         {
-          "command": "angular-generate.interceptor"
+          "command": "angular-generate.interceptor",
+          "when": "explorerResourceIsFolder"
         },
         {
-          "command": "angular-generate.module"
+          "command": "angular-generate.module",
+          "when": "explorerResourceIsFolder"
         },
         {
-          "command": "angular-generate.pipe"
+          "command": "angular-generate.pipe",
+          "when": "explorerResourceIsFolder"
         },
         {
-          "command": "angular-generate.guard"
+          "command": "angular-generate.guard",
+          "when": "explorerResourceIsFolder"
         },
         {
-          "command": "angular-generate.environments"
+          "command": "angular-generate.environments",
+          "when": "explorerResourceIsFolder"
         }
       ]
     }
