@@ -3,6 +3,7 @@
   "displayName": "Angular Generator",
   "description": "",
   "version": "0.1.0",
+  "icon": "./assets/images/icon.png",
   "engines": {
     "vscode": "^1.86.0"
   },
@@ -11,6 +12,10 @@
   ],
   "activationEvents": [],
   "main": "./extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dapost/angular-generator-vscode"
+  },
   "contributes": {
     "commands": [{
         "command": "angular-generate.component",
