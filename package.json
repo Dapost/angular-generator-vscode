@@ -1,0 +1,83 @@
+{
+  "name": "angular-generate-vscode",
+  "displayName": "Angular Generator",
+  "description": "",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [{
+        "command": "angular-generate.component",
+        "title": "Angular Generate: Component"
+      },
+      {
+        "command": "angular-generate.directive",
+        "title": "Angular Generate: Directive"
+      },
+      {
+        "command": "angular-generate.service",
+        "title": "Angular Generate: Service"
+      },
+      {
+        "command": "angular-generate.module",
+        "title": "Angular Generate: Module"
+      },
+      {
+        "command": "angular-generate.interceptor",
+        "title": "Angular Generate: Interceptor"
+      },
+      {
+        "command": "angular-generate.pipe",
+        "title": "Angular Generate: Pipe"
+      },
+      {
+        "command": "angular-generate.guard",
+        "title": "Angular Generate: Guard"
+      }
+    ],
+    "menus": {
+      "explorer/context": [{
+          "command": "angular-generate.component"
+        },
+        {
+          "command": "angular-generate.directive"
+        },
+        {
+          "command": "angular-generate.service"
+        },
+        {
+          "command": "angular-generate.interceptor"
+        },
+        {
+          "command": "angular-generate.module"
+        },
+        {
+          "command": "angular-generate.pipe"
+        },
+        {
+          "command": "angular-generate.guard"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.86.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "eslint": "^8.56.0",
+    "typescript": "^5.3.3",
+    "@vscode/test-cli": "^0.0.4",
+    "@vscode/test-electron": "^2.3.9"
+  }
+}
