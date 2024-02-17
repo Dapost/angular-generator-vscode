@@ -6,6 +6,7 @@
 
 [![Language](https://img.shields.io/badge/Language-JavaScript-yellow.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/davidepostiglione)
 
 ### Description
 
@@ -62,3 +63,6 @@ Contributions are welcome! Feel free to submit bug reports, feature requests, or
 ### License
 
 This extension is licensed under the [MIT License](LICENSE).
+
+
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/davidepostiglione)
