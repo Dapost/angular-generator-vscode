@@ -39,6 +39,10 @@
       {
         "command": "angular-generate.guard",
         "title": "Angular Generate: Guard"
+      },
+      {
+        "command": "angular-generate.environments",
+        "title": "Angular Generate: Environments"
       }
     ],
     "menus": {
@@ -62,6 +66,9 @@
         },
         {
           "command": "angular-generate.guard"
+        },
+        {
+          "command": "angular-generate.environments"
         }
       ]
     }

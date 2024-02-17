@@ -41,6 +41,11 @@ function activate(context) {
 		(event) => generate(event, guardOptions, 'guard')
 	);
 	context.subscriptions.push(guard);
+
+	const environments = vscode.commands.registerCommand('angular-generate.environments',
+		() => generateEnvironments()
+	);
+	context.subscriptions.push(environments);
 }
 
 // This method is called when your extension is deactivated
@@ -54,17 +59,24 @@ async function generate(event, options, entity) {
 	const workspaceName = vscode.workspace.workspaceFolders.at(0).name;
 	const fullpath = event.path
 	const path = fullpath.split(`${workspaceName}/src/app`).at(-1)
+
 	const optionlist = await vscode.window.showQuickPick([...options], {
 		canPickMany: true
 	})
-
 	const optionsJoined = optionlist.map(opt => opt.description).join(' ')
+
 	const terminal = vscode.window.createTerminal();
 	terminal.show();
 	terminal.sendText(`ng generate ${entity} ${path}/${name} ${optionsJoined}`)
 
 	vscode.window.showInformationMessage(`${capitalizeEntity} ${name} generated!`);
+}
 
+function generateEnvironments() {
+	const terminal = vscode.window.createTerminal();
+	terminal.show();
+	terminal.sendText(`ng generate environments`)
+	vscode.window.showInformationMessage(`Environments generated!`);
 }
 
 const componentOptions = [{
@@ -203,8 +215,7 @@ const directiveOptions = [{
 	}
 ]
 
-const interceptorOptions = [
-	{
+const interceptorOptions = [{
 		label: "Functional",
 		detail: "Specifies whether to generate a guard as a function.",
 		description: '--functional'
@@ -216,6 +227,7 @@ const interceptorOptions = [
 	},
 ]
 
+const environmentOptions = []
 
 module.exports = {
 	activate,
