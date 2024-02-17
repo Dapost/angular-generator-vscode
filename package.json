@@ -4,6 +4,7 @@
   "description": "",
   "version": "0.1.0",
   "icon": "./assets/images/icon.png",
+  "publisher": "DavidePostiglione",
   "engines": {
     "vscode": "^1.86.0"
   },
