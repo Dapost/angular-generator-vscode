@@ -58,7 +58,18 @@ async function generate(event, options, entity) {
 
 	const [workspacePath, relativePath] = event.path.split('src/app')
 
-	const optionlist = await vscode.window.showQuickPick([...options], {
+	const quickPick = vscode.window.createQuickPick();
+	quickPick.title = `Select ${entity} options`;
+	quickPick.items = options;
+	quickPick.buttons = [{iconPath: new vscode.ThemeIcon('star-empty'), tooltip:'test'}]
+	quickPick.onBut
+	quickPick.onDidAccept((options) => console.log(quickPick.selectedItems) )
+
+	quickPick.show()
+	
+/* 
+	const optionlist = await vscode.window.showQuickPick([...o
+		ptions], {
 		canPickMany: true
 	})
 	const optionsJoined = optionlist.map(opt => opt.description).join(' ')
@@ -66,9 +77,25 @@ async function generate(event, options, entity) {
 	const terminal = vscode.window.createTerminal();
 	terminal.show();
 	terminal.sendText(`cd ${workspacePath}`)
-	terminal.sendText(`ng generate ${entity} ${relativePath}/${name} ${optionsJoined}`)
+	terminal.sendText(`ng generate ${entity} ${relativePath}/${name} ${optionsJoined}`) */
 
 	vscode.window.showInformationMessage(`${capitalizeEntity} ${name} generated!`);
+}
+
+function _createQuickPickList(entity, options){
+	const quickPick = vscode.window.createQuickPick();
+	quickPick.title = `Select ${entity} options`;
+	quickPick.items = options;
+	quickPick.onDidTriggerItemButton((item) => {
+
+	} )
+	quickPick.onDidAccept((options) => console.log(quickPick.selectedItems) )
+
+	quickPick.show()
+}
+
+function _saveItemToFavourite(){
+	
 }
 
 function generateEnvironments() {
@@ -81,57 +108,78 @@ function generateEnvironments() {
 const componentOptions = [{
 		label: "Standalone",
 		detail: "Generate a standalone component without module imports. (Available from v14+)",
-		description: '--standalone'
+		description: '--standalone',
+		buttons:[{iconPath: new vscode.ThemeIcon('star-empty'), tooltip:'Add to favourites'}]
 	},
 	{
 		label: "Not Standalone",
 		detail: "Generate a not standalone component, in v.17+ standalone components are default",
-		description: '--standalone=false'
+		description: '--standalone=false',
+		buttons:[{iconPath: new vscode.ThemeIcon('star-empty'), tooltip:'Add to favourites'}]
+
 	},
 	{
 		label: "Change Detection: OnPush",
 		detail: "Generate a component with change detection set to OnPush.",
-		description: '--change-detection OnPush'
+		description: '--change-detection OnPush',
+		buttons:[{iconPath: new vscode.ThemeIcon('star-empty'), tooltip:'Add to favourites'}]
+
 	},
 	{
 		label: "Display Block",
 		detail: "Generate a component with display set to block in its styles.",
-		description: '--display-block'
+		description: '--display-block',
+		buttons:[{iconPath: new vscode.ThemeIcon('star-empty'), tooltip:'Add to favourites'}]
+
 	},
 	{
 		label: "Skip Test",
 		detail: "Generate a component without accompanying test files.",
-		description: '--skip-tests'
+		description: '--skip-tests',
+		buttons:[{iconPath: new vscode.ThemeIcon('star-empty'), tooltip:'Add to favourites'}]
+
 	},
 	{
 		label: "Flat",
 		detail: "Generate the component files in the same directory, without creating a separate folder.",
-		description: '--flat'
+		description: '--flat',
+		buttons:[{iconPath: new vscode.ThemeIcon('star-empty'), tooltip:'Add to favourites'}]
+
 	},
 	{
 		label: "Inline Template",
 		detail: "Generate the component with the template defined inline in the component file.",
-		description: '--inline-template'
+		description: '--inline-template',
+		buttons:[{iconPath: new vscode.ThemeIcon('star-empty'), tooltip:'Add to favourites'}]
+
 	},
 	{
 		label: "Inline Style",
 		detail: "Generate the component with the styles defined inline in the component file.",
-		description: '--inline-style'
+		description: '--inline-style',
+		buttons:[{iconPath: new vscode.ThemeIcon('star-empty'), tooltip:'Add to favourites'}]
+
 	},
 	{
 		label: "Skip Import",
 		detail: "Generate the component without importing it into the nearest module file.",
-		description: '--skip-import'
+		description: '--skip-import',
+		buttons:[{iconPath: new vscode.ThemeIcon('star-empty'), tooltip:'Add to favourites'}]
+
 	},
 	{
 		label: "View Encapsulation: None",
 		detail: "Generate the component with view encapsulation set to None.",
-		description: '--view-encapsulation None'
+		description: '--view-encapsulation None',
+		buttons:[{iconPath: new vscode.ThemeIcon('star-empty'), tooltip:'Add to favourites'}]
+
 	},
 	{
 		label: "View Encapsulation: ShadowDom",
 		detail: "Generate the component with view encapsulation set to ShadowDom.",
-		description: '--view-encapsulation ShadowDom'
+		description: '--view-encapsulation ShadowDom',
+		buttons:[{iconPath: new vscode.ThemeIcon('star-empty'), tooltip:'Add to favourites'}]
+
 	}
 ]
 
