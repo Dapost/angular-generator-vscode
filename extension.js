@@ -63,9 +63,9 @@ async function generate(event, options, entity) {
 	})
 	const optionsJoined = optionlist.map(opt => opt.description).join(' ')
 
-	const terminal = vscode.window.createTerminal();
+	const terminal = vscode.window.createTerminal('Angular Generator');
 	terminal.show();
-	terminal.sendText(`cd ${workspacePath}`)
+	terminal.sendText(`cd "${workspacePath}"`)
 	terminal.sendText(`ng generate ${entity} ${relativePath}/${name} ${optionsJoined}`)
 
 	vscode.window.showInformationMessage(`${capitalizeEntity} ${name} generated!`);
