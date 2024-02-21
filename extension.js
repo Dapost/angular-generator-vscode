@@ -1,5 +1,4 @@
 const vscode = require('vscode');
-
 /**
  * @param {vscode.ExtensionContext} context
  */
@@ -56,9 +55,8 @@ async function generate(event, options, entity) {
 	const name = await vscode.window.showInputBox({
 		title: `${capitalizeEntity} Name`
 	});
-	const workspaceName = vscode.workspace.workspaceFolders.at(0).name;
-	const fullpath = event.path
-	const path = fullpath.split(`${workspaceName}/src/app`).at(-1)
+
+	const [workspacePath, relativePath] = event.path.split('src/app')
 
 	const optionlist = await vscode.window.showQuickPick([...options], {
 		canPickMany: true
@@ -67,7 +65,8 @@ async function generate(event, options, entity) {
 
 	const terminal = vscode.window.createTerminal();
 	terminal.show();
-	terminal.sendText(`ng generate ${entity} ${path}/${name} ${optionsJoined}`)
+	terminal.sendText(`cd ${workspacePath}`)
+	terminal.sendText(`ng generate ${entity} ${relativePath}/${name} ${optionsJoined}`)
 
 	vscode.window.showInformationMessage(`${capitalizeEntity} ${name} generated!`);
 }
