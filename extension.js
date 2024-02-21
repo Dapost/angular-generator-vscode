@@ -42,7 +42,7 @@ function activate(context) {
 	context.subscriptions.push(guard);
 
 	const environments = vscode.commands.registerCommand('angular-generate.environments',
-		() => generateEnvironments()
+		(event) => generateEnvironments(event)
 	);
 	context.subscriptions.push(environments);
 }
@@ -56,7 +56,7 @@ async function generate(event, options, entity) {
 		title: `${capitalizeEntity} Name`
 	});
 
-	const [workspacePath, relativePath] = event.path.split('src/app')
+	const [workspacePath, relativePath] = _getPath(event.path);
 
 	const optionlist = await vscode.window.showQuickPick([...options], {
 		canPickMany: true
@@ -71,9 +71,18 @@ async function generate(event, options, entity) {
 	vscode.window.showInformationMessage(`${capitalizeEntity} ${name} generated!`);
 }
 
-function generateEnvironments() {
+function _getPath(fullpath) {
+	return fullpath
+		.replace(/\/[a-zA-Z]:/, (match) => match.slice(1))
+		.split('src/app')
+}
+
+function generateEnvironments(event) {
 	const terminal = vscode.window.createTerminal();
+	const [workspacePath] = _getPath(event.path);
+
 	terminal.show();
+	terminal.sendText(`cd "${workspacePath}"`)
 	terminal.sendText(`ng generate environments`)
 	vscode.window.showInformationMessage(`Environments generated!`);
 }
