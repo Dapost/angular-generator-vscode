@@ -284,7 +284,7 @@ export const initial${entityName}Store: ${entityName}State = {
 
 };
  
- export const AuthStore = signalStore(
+ export const ${entityName}Store = signalStore(
 	{ providedIn: 'root' },
 	withState(initial${entityName}Store),
 	withComputed((store) => ({})),
