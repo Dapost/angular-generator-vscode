@@ -45,6 +45,11 @@ function activate(context) {
 		(event) => generateEnvironments(event)
 	);
 	context.subscriptions.push(environments);
+
+	const signalStore = vscode.commands.registerCommand('angular-generate.signalStore',
+		(event) => generateSignalStore(event)
+	);
+	context.subscriptions.push(signalStore);
 }
 
 // This method is called when your extension is deactivated
@@ -85,6 +90,27 @@ function generateEnvironments(event) {
 	terminal.sendText(`cd "${workspacePath}"`)
 	terminal.sendText(`ng generate environments`)
 	vscode.window.showInformationMessage(`Environments generated!`);
+}
+
+
+async function generateSignalStore(event) {
+	let workspacePath = event.path;
+
+	const name = await vscode.window.showInputBox({
+		title: 'Insert name of the store (avoid "Store" suffix)',
+		placeHolder: 'Example: auth, user, product',
+		prompt: 'Enter a name for your signal store'
+	});
+	
+	if (workspacePath.charAt(-1) === '/' || workspacePath.charAt(-1) === '\\') {
+		workspacePath = workspacePath.slice(0, -1);
+	}
+
+	let uri = vscode.Uri.file(`${workspacePath}/${name}.store.ts`);
+	
+	vscode.workspace.fs.writeFile(uri, new TextEncoder().encode(generateStoreTemplate(name)));
+	vscode.window.showInformationMessage(`Signal Store ${name} generated!`);
+	vscode.window.showTextDocument(uri);
 }
 
 const componentOptions = [{
@@ -236,6 +262,38 @@ const interceptorOptions = [{
 ]
 
 const environmentOptions = []
+
+
+const generateStoreTemplate = (name) => {
+	const entityName = name.charAt(0).toUpperCase() + name.slice(1);
+
+	return (
+		`import {
+  signalStore,
+  withHooks,
+  withMethods,
+  withState,
+  withComputed
+} from '@ngrx/signals';
+
+type ${entityName}State = {
+
+};
+
+export const initial${entityName}Store: ${entityName}State = {
+
+};
+ 
+ export const AuthStore = signalStore(
+	{ providedIn: 'root' },
+	withState(initial${entityName}Store),
+	withComputed((store) => ({})),
+	withMethods((store) => ({})),
+	withHooks((store) => ({}))
+ );
+ `);
+};
+
 
 module.exports = {
 	activate,

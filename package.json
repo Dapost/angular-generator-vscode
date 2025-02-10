@@ -52,6 +52,10 @@
       {
         "command": "angular-generate.environments",
         "title": "Angular Generate: Environments"
+      },
+      {
+        "command": "angular-generate.signalStore",
+        "title": "Angular Generate: SignalStore"
       }
     ],
     "menus": {
@@ -85,6 +89,10 @@
         },
         {
           "command": "angular-generate.environments",
+          "when": "explorerResourceIsFolder"
+        },
+        {
+          "command": "angular-generate.signalStore",
           "when": "explorerResourceIsFolder"
         }
       ]
